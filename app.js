@@ -9,7 +9,7 @@ app.use(express.json());
 app.get("/api/see",async(req,res)=>{
     try{
         let data = await ApiFetch();
-        if(data===NULL){
+        if(data===null){
             return res.status(400).json({error:"Returned Empty"});
         }
         const size = _.size(data.blogs);
@@ -17,7 +17,7 @@ app.get("/api/see",async(req,res)=>{
             return res.status(400).json({error:"Empty Set"});
         }
         const longestString = _.maxBy(data.blogs, obj => _.get(obj, 'title.length', 0));
-        if(longestString===NULL){
+        if(longestString===null){
             return res.status(404).json({error:"None found"});
         }
         const TitlesCount = _.filter(data.blogs, item =>
@@ -50,7 +50,7 @@ app.get("/api/search",async (req,res)=>{
         const title = Object.values(filter)[0]; 
         const privacyTitles = _.filter(data.blogs, item =>
             _.includes(item.title.toLowerCase(), title));
-        if(privacyTitles===NULL){
+        if(privacyTitles.length===0){
             return res.status(400).json({error:"invalid parameter"});
         }
         return res.json(privacyTitles);
